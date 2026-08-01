@@ -56,3 +56,8 @@ CodeCoverage/
 TestResult.xml
 nunit-*.xml
 /.idea/
+*.v2
+*.vsidx
+*.json
+*.bin
+*.config
