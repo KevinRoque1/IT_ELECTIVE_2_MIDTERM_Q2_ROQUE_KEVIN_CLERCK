@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-namespace PlaylistApp.Models.DTOs
+namespace WebApplication1.Models.DTOs
 {
     public class CreatePlaylistDto
     {
@@ -7,9 +7,5 @@ namespace PlaylistApp.Models.DTOs
         public string Title { get; set; } = string.Empty;
         public List<CreateVideoDto> Videos { get; set; } = new();
     }
-    public class CreateVideoDto
-    {
-        public string YouTubeUrl { get; set; } = string.Empty;
-        public string TrackNote { get; set; } = string.Empty;
-    }
+
 }

@@ -1,4 +1,4 @@
-﻿namespace PlaylistApp.Models.Entities
+﻿namespace WebApplication1.Models.Entities
 {
     public class Playlist
     {
@@ -7,9 +7,5 @@
         public string CreatorName { get; set; } = string.Empty;
         public List<VideoItem> Videos { get; set; } = new();
     }
-    public class VideoItem
-    {
-        public string YouTubeUrl { get; set; } = string.Empty;
-        public string TrackNote { get; set; } = string.Empty;
-    }
+
 }

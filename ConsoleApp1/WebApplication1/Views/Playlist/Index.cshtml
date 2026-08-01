@@ -1,0 +1,107 @@
+﻿@model List<WebApplication1.Models.Entities.Playlist>
+
+@{
+    ViewData["Title"] = "My Playlists";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="display-4 fw-bold">Playlists</h1>
+            <p class="text-muted mb-0">
+                Welcome, <strong>@ViewBag.Username!</strong>
+            </p>
+        </div>
+
+        <div>
+            <a asp-controller="Playlist"
+               asp-action="Create"
+               class="btn btn-success">
+                + Create Playlist
+            </a>
+
+            <a asp-controller="Auth"
+               asp-action="Logout"
+               class="btn btn-outline-danger">
+                Logout
+            </a>
+        </div>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            No playlists available. Create one to get started!
+        </div>
+    }
+    else
+    {
+        @foreach (var playlist in Model)
+        {
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header bg-light border-bottom">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h3 class="mb-1 fw-bold">@playlist.Title</h3>
+                            <p class="text-muted mb-0 small">
+                                Created by <strong>@playlist.CreatorName</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body p-4">
+                    @if (!playlist.Videos.Any())
+                    {
+                        <p class="text-muted">No videos in this playlist.</p>
+                    }
+                    else
+                    {
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th style="width: 5%;">#</th>
+                                    <th style="width: 50%;">Track</th>
+                                    <th style="width: 45%;">Notes</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @for (int i = 0; i < playlist.Videos.Count; i++)
+                                {
+                                    <tr>
+                                        <td class="fw-semibold">@(i + 1)</td>
+
+                                        <td>
+                                            <a href="@playlist.Videos[i].YouTubeUrl"
+                                               target="_blank"
+                                               rel="noopener noreferrer"
+                                               class="text-success text-decoration-none fw-semibold">
+                                                🔗 View Video
+                                            </a>
+                                            <br />
+                                            <small class="text-muted text-break">
+                                                @playlist.Videos[i].YouTubeUrl
+                                            </small>
+                                        </td>
+
+                                        <td>
+                                            @if (!string.IsNullOrWhiteSpace(playlist.Videos[i].TrackNote))
+                                            {
+                                                <span>@playlist.Videos[i].TrackNote</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-muted">—</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+        }
+    }
+</div>
